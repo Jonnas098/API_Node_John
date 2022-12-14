@@ -54,6 +54,21 @@ export const getPeliculaById = async (req, res) => {
   }
 };
 
+export const getPeliculaByCat = async (req, res) => {
+  try {
+    const pool = await getConnection();
+
+    const result = await pool
+      .request()
+      .input("categoria", req.params.categoria)
+      .query(querys.getPeliculaByCat);
+    return res.json(result.recordset[0]);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};
+
 // Update
 //Funcion para cambiar la categoria de una pelicula mediante su ID
 export const actualizarPelicula = async (req, res) => {

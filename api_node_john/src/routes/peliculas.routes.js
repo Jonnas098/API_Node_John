@@ -3,6 +3,7 @@ import {
   crearPelicula,
   getPelicula,
   getPeliculaById,
+  getPeliculaByCat,
   actualizarPelicula,
   borrarPeliculaById,
   defaultPelicula
@@ -20,6 +21,8 @@ router.get("/peliculas/getPelicula", getPelicula);
 
 //R - ejemplo con parametro
 router.get("/peliculas/getPeliculaById/:id", getPeliculaById);
+
+router.get("/peliculas/getPeliculaByCat/:categoria", getPeliculaByCat);
 
 //U
 router.put("/peliculas/actualizarPelicula/:id", actualizarPelicula);

@@ -27,9 +27,56 @@ INSERT INTO Pelicula VALUES
 GO 
 
 --C
+--Crea un nuevo registro de pelicula
+CREATE PROCEDURE AgregarPelicula @nombre nvarchar(50), @dura nvarchar(50), @catego nvarchar(20)
+AS
+INSERT INTO Pelicula (nombre_pelicula, duracion, categoria)  VALUES (@nombre, @dura, @catego)
+GO;
+
+--EXEC AgregarPelicula @nombre = 'Star Wars', @dura = '3:32', @catego = 'SciFi'
+
 --R
+--Solicitar todos los datos de la tabla Pelicula
+CREATE PROCEDURE TodasLasPeliculas
+AS
+SELECT * FROM Pelicula
+GO;
+
+--EXEC TodasLasPeliculas;
+
+--Solicitar una Pelicula mediante du ID
+CREATE PROCEDURE PeliculaById @Id int
+AS
+SELECT * FROM Pelicula WHERE id_pelicula = @Id
+GO;
+
+--EXEC PeliculaById @Id = 1;
+
+--Solicitar las peliculas de una categoria en especifico
+CREATE PROCEDURE PeliculasByCat @categorias nvarchar(20)
+AS
+SELECT * FROM Pelicula WHERE categoria = @categorias
+GO;
+
+--EXEC PeliculasByCat @categorias = 'Infantil'
+
 --U
+--Cambiar la categoria de una pelicula mediante su Id
+CREATE PROCEDURE ActualizarCategoriaById @categorias nvarchar(20), @Id int
+AS
+UPDATE Pelicula SET categoria = @categorias WHERE id_pelicula = @Id
+GO;
+
+--EXEC ActualizarCategoriaById @Id = 1, @categorias = 'Infantil'
+
 --D
+--Borrar una pelicula mediante su id
+CREATE PROCEDURE BorrarPeliculaById @Id int
+AS
+DELETE Pelicula WHERE id_pelicula = @Id
+GO;
+
+--EXEC BorrarPeliculaById @Id = 21;
 
 --Crear tabla para cada Sala
 CREATE TABLE Sala(
@@ -78,5 +125,4 @@ GO
 --U
 --D
 
-SELECT * FROM Pelicula
 
